@@ -44,4 +44,28 @@ class Api {
         return null;
     }
   }
+
+  Future<void> getDeathStats() async {
+    http.Response response = await http.get(BASE_URL + "/deaths");
+    switch(response.statusCode) {
+      case 200:
+        var json = jsonDecode(response.body);
+        statsBox.put("deaths", json);
+        break;
+      default:
+        return null;
+    }
+  }
+
+  Future<void> getRecoveredStats() async {
+    http.Response response = await http.get(BASE_URL + "/recovered");
+    switch(response.statusCode) {
+      case 200:
+        var json = jsonDecode(response.body);
+        statsBox.put("recovered", json);
+        break;
+      default:
+        return null;
+    }
+  }
 }
